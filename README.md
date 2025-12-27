@@ -137,7 +137,9 @@ git clone https://github.com/go-admin-team/go-admin-ui.git
 
 ### Startup instructions
 
-#### Server startup instructions
+#### 🚀 Quick Start (SQLite3 Recommended)
+
+The project uses SQLite3 as the default database, **no need to install MySQL or other database services**, and **no CGO required**! We use pure Go SQLite driver (`github.com/glebarez/sqlite`), works out of the box.
 
 ```bash
 # Enter the go-admin backend project
@@ -146,17 +148,67 @@ cd ./go-admin
 # Update dependencies
 go mod tidy
 
-# Compile the project
+# Compile the project (pure Go SQLite, no CGO needed)
 go build
 
-# Change setting 
-# File path go-admin/config/settings.yml
-vi ./config/settings.yml
+# Initialize database (first time only)
+./go-admin migrate -c config/settings.yml
 
-# 1. Modify the database information in the configuration file
-# Note: The corresponding configuration data under settings.database
-# 2. Confirm the log path
+# Start the service
+./go-admin server -c config/settings.yml
 ```
+
+**Windows Users**:
+```powershell
+# Compile (pure Go, no GCC needed)
+go build
+
+# Initialize database
+go-admin.exe migrate -c config/settings.yml
+
+# Start service
+go-admin.exe server -c config/settings.yml
+```
+
+✅ **No GCC or C compiler required** - Uses pure Go SQLite implementation based on `modernc.org/sqlite`, fully compatible with standard SQLite.
+
+**Access the system**:
+- API Service: http://localhost:8000
+- Swagger Docs: http://localhost:8000/swagger/index.html
+- Default account: `admin` / `123456`
+
+#### Using Other Databases (MySQL/PostgreSQL)
+
+If you need to use MySQL or PostgreSQL (recommended for production):
+
+1. **Select configuration file**:
+   ```bash
+   # Use MySQL
+   cp config/settings.mysql.yml config/settings.yml
+
+   # Use PostgreSQL
+   cp config/settings.postgres.yml config/settings.yml
+   ```
+
+2. **Modify database connection**:
+   Edit `config/settings.yml`, update connection info in `database.source`
+
+3. **Make sure database service is running**, then initialize and start:
+   ```bash
+   ./go-admin migrate -c config/settings.yml
+   ./go-admin server -c config/settings.yml
+   ```
+
+**Database configuration files**:
+- `settings.yml` - SQLite3 configuration (default, no database installation needed)
+- `settings.mysql.yml` - MySQL configuration example
+- `settings.postgres.yml` - PostgreSQL configuration example
+- `settings.sqlite.yml` - SQLite3 reference configuration
+
+**SQLite3 Limitations**:
+- ✅ Good for: Development, testing, demos, small applications
+- ⚠️ Not suitable for: High-concurrency writes, large production environments, distributed deployment scenarios
+- 📝 For better concurrency and production support, use MySQL or PostgreSQL
 
 :::tip ⚠️Note that this problem will occur if CGO is not installed in the windows10+ environment;
 

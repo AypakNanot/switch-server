@@ -1,16 +1,31 @@
 PROJECT:=go-admin
 
+# Default build with SQLite support (pure Go, no CGO required)
 .PHONY: build
 build:
-	CGO_ENABLED=0 go build -ldflags="-w -s" -a -installsuffix "" -o go-admin .
+	go build -ldflags="-w -s" -o go-admin .
 
-# make build-linux
+# Build for Linux (Docker)
 build-linux:
 	@docker build -t go-admin:latest .
 	@echo "build successful"
 
-build-sqlite:
-	go build -tags sqlite3 -ldflags="-w -s" -a -installsuffix -o go-admin .
+# Build for specific platforms (pure Go SQLite, no CGO needed)
+build-linux-amd64:
+	env GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -o go-admin-linux-amd64 .
+
+build-windows:
+	env GOOS=windows GOARCH=amd64 go build -ldflags="-w -s" -o go-admin.exe .
+
+build-mac:
+	env GOOS=darwin GOARCH=amd64 go build -ldflags="-w -s" -o go-admin-mac .
+
+build-mac-arm:
+	env GOOS=darwin GOARCH=arm64 go build -ldflags="-w -s" -o go-admin-mac-arm .
+
+# Build without any special flags
+build-std:
+	go build -ldflags="-w -s" -o go-admin .
 
 # make run
 run:

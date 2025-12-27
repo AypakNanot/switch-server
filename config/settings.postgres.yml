@@ -27,49 +27,43 @@ settings:
     # token 过期时间 单位：秒
     timeout: 3600
   database:
-    # 数据库类型 mysql, sqlite3, postgres, sqlserver
-    # 默认使用 SQLite3，无需安装数据库服务器，适合开发和演示环境
-    driver: sqlite3
-    # SQLite 数据库文件路径（相对路径或绝对路径）
-    source: go-admin-db.db
-    # MySQL 连接示例:
-    # driver: mysql
-    # source: user:password@tcp(127.0.0.1:3306)/dbname?charset=utf8&parseTime=True&loc=Local&timeout=1000ms
-    # PostgreSQL 连接示例:
-    # driver: postgres
-    # source: host=127.0.0.1 port=5432 user=postgres password=password dbname=go-admin sslmode=disable
-    # SQL Server 连接示例:
-    # driver: sqlserver
-    # source: sqlserver://user:password@localhost?database=go-admin
-#  databases:
-#    'locaohost:8000':
-#      driver: mysql
-#        # 数据库连接字符串 mysql 缺省信息 charset=utf8&parseTime=True&loc=Local&timeout=1000ms
-#        source: user:password@tcp(127.0.0.1:3306)/dbname?charset=utf8&parseTime=True&loc=Local&timeout=1000ms
-#      registers:
-#        - sources:
-#            - user:password@tcp(127.0.0.1:3306)/dbname?charset=utf8&parseTime=True&loc=Local&timeout=1000ms
+    # PostgreSQL 数据库配置
+    driver: postgres
+    # 数据库连接字符串
+    # 格式: host=host port=port user=user password=password dbname=dbname sslmode=mode
+    # 参数说明:
+    #   host             - 数据库主机地址
+    #   port             - 端口号，默认 5432
+    #   user             - 用户名
+    #   password         - 密码
+    #   dbname           - 数据库名
+    #   sslmode          - SSL 模式: disable, require, verify-ca, verify-full
+    #   connect_timeout  - 连接超时（秒）
+    #   timezone         - 时区，默认 UTC
+    source: host=127.0.0.1 port=5432 user=postgres password=123456 dbname=go-admin sslmode=disable connect_timeout=10 timezone=Asia/Shanghai
   gen:
     # 代码生成读取的数据库名称
-    dbname: dbname
+    dbname: go-admin
     # 代码生成是使用前端代码存放位置，需要指定到src文件夹，相对路径
     frontpath: ../go-admin-ui/src
   extend: # 扩展项使用说明
     demo:
       name: data
   cache:
+    # Redis 缓存配置（可选）
 #    redis:
 #      addr: 127.0.0.1:6379
-#      password: xxxxxx
+#      password: ""
 #      db: 2
-    # key存在即可
-    memory: '' 
+    # 内存缓存（默认）
+    memory: ''
   queue:
     memory:
       poolSize: 100
+    # Redis 队列配置（可选）
 #    redis:
 #      addr: 127.0.0.1:6379
-#      password: xxxxxx
+#      password: ""
 #      producer:
 #        streamMaxLength: 100
 #        approximateMaxLength: true

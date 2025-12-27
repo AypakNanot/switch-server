@@ -139,7 +139,9 @@ git clone https://github.com/go-admin-team/go-admin-ui.git
 
 ### 启动说明
 
-#### 服务端启动说明
+#### 🚀 快速启动（SQLite3 推荐）
+
+项目默认使用 SQLite3 数据库，**无需安装 MySQL 或其他数据库服务**，使用纯 Go SQLite 驱动，**无需 CGO**，开箱即用！
 
 ```bash
 # 进入 go-admin 后端项目
@@ -148,56 +150,67 @@ cd ./go-admin
 # 更新整理依赖
 go mod tidy
 
-# 编译项目
+# 编译项目（纯 Go SQLite，无需 CGO）
 go build
 
-# 修改配置 
-# 文件路径  go-admin/config/settings.yml
-vi ./config/settings.yml
+# 初始化数据库（首次运行）
+./go-admin migrate -c config/settings.yml
 
-# 1. 配置文件中修改数据库信息 
-# 注意: settings.database 下对应的配置数据
-# 2. 确认log路径
+# 启动服务
+./go-admin server -c config/settings.yml
 ```
 
-⚠️注意 在windows环境如果没有安装中CGO，会出现这个问题；
+**Windows 用户**：
+```powershell
+# 编译（纯 Go，无需 GCC）
+go build
 
-```bash
-E:\go-admin>go build
-# github.com/mattn/go-sqlite3
-cgo: exec /missing-cc: exec: "/missing-cc": file does not exist
+# 初始化数据库
+go-admin.exe migrate -c config/settings.yml
+
+# 启动服务
+go-admin.exe server -c config/settings.yml
 ```
 
-or
+✅ **无需安装 GCC 或其他 C 编译器**，使用纯 Go 实现的 SQLite 驱动 `github.com/glebarez/sqlite`，基于 `modernc.org/sqlite`，完全兼容标准 SQLite。
 
-```bash
-D:\Code\go-admin>go build
-# github.com/mattn/go-sqlite3
-cgo: exec gcc: exec: "gcc": executable file not found in %PATH%
-```
+**访问系统**：
+- API 服务：http://localhost:8000
+- Swagger 文档：http://localhost:8000/swagger/index.html
+- 默认账号：`admin` / `123456`
 
-[解决cgo问题进入](https://doc.go-admin.dev/zh-CN/guide/faq#cgo-%E7%9A%84%E9%97%AE%E9%A2%98)
+#### 使用其他数据库（MySQL/PostgreSQL）
 
+如果你需要使用 MySQL 或 PostgreSQL（生产环境推荐）：
 
-#### 初始化数据库，以及服务启动
+1. **选择配置文件**：
+   ```bash
+   # 使用 MySQL
+   cp config/settings.mysql.yml config/settings.yml
 
-``` bash
-# 首次配置需要初始化数据库资源信息
-# macOS or linux 下使用
-$ ./go-admin migrate -c config/settings.dev.yml
+   # 使用 PostgreSQL
+   cp config/settings.postgres.yml config/settings.yml
+   ```
 
-# ⚠️注意:windows 下使用
-$ go-admin.exe migrate -c config/settings.dev.yml
+2. **修改数据库连接信息**：
+   编辑 `config/settings.yml`，修改 `database.source` 中的连接信息
 
+3. **确保数据库服务已启动**，然后初始化并启动：
+   ```bash
+   ./go-admin migrate -c config/settings.yml
+   ./go-admin server -c config/settings.yml
+   ```
 
-# 启动项目，也可以用IDE进行调试
-# macOS or linux 下使用
-$ ./go-admin server -c config/settings.yml
+**数据库配置文件说明**：
+- `settings.yml` - SQLite3 配置（默认，无需安装数据库）
+- `settings.mysql.yml` - MySQL 配置示例
+- `settings.postgres.yml` - PostgreSQL 配置示例
+- `settings.sqlite.yml` - SQLite3 参考配置
 
-
-# ⚠️注意:windows 下使用
-$ go-admin.exe server -c config/settings.yml
-```
+**SQLite3 限制说明**：
+- ✅ 适合：开发、测试、演示、小型应用
+- ⚠️ 不适合：高并发写入、大型生产环境、需要分布式部署的场景
+- 📝 如果需要更好的并发性能和生产环境支持，请使用 MySQL 或 PostgreSQL
 
 #### sys_api 表的数据如何添加
 

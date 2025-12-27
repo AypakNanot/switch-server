@@ -13,4 +13,5 @@ var opens = map[string]func(string) gorm.Dialector{
 	"mysql":     mysql.Open,
 	"postgres":  postgres.Open,
 	"sqlserver": sqlserver.Open,
+	// sqlite3 由 open_sqlite.go 添加
 }
