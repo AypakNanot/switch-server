@@ -27,7 +27,7 @@ import (
 	common "go-admin/common/middleware"
 	"go-admin/common/middleware/handler"
 	"go-admin/common/storage"
-	"go-admin/web/dist"
+	"go-admin/web"
 	ext "go-admin/config"
 )
 
@@ -190,7 +190,7 @@ func initRouter() {
 	// 设置前端静态文件服务 - 直接使用 embed.FS 读取文件
 	// 静态资源路由 (css, js, fonts, img 等)
 	serveStaticFile := func(c *gin.Context, filePath string) {
-		data, err := dist.WebFS.ReadFile(filePath)
+		data, err := web.WebFS.ReadFile(filePath)
 		if err != nil {
 			c.String(http.StatusNotFound, "File not found")
 			return

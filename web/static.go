@@ -1,9 +1,9 @@
 //go:build !exclude_webdist
 // +build !exclude_webdist
 
-package dist
+package web
 
 import "embed"
 
-//go:embed *
+//go:embed dist/*
 var WebFS embed.FS

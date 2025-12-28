@@ -27,5 +27,5 @@ config/settings.deva.yml
 
 # Frontend build artifacts
 web/dist/
-!web/dist/static.go
-!web/dist/embed/*.go
+# Preserve embed source file in parent directory
+!web/static.go
