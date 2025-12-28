@@ -5,10 +5,11 @@ The system SHALL embed frontend static files into the Go binary at compile time 
 
 #### Scenario: Frontend files are embedded
 - **GIVEN** a `web/dist/` directory containing compiled frontend assets
-- **AND** a Go source file with `//go:embed *` directive in that directory
+- **AND** a `web/static.go` file with `//go:embed dist/*` directive
 - **WHEN** the project is compiled with `go build`
-- **THEN** all static files are embedded into the binary executable
+- **THEN** all static files from `web/dist/` are embedded into the binary executable
 - **AND** the binary contains all HTML, CSS, JavaScript, fonts, and images
+- **AND** files are accessed in the embed filesystem with `dist/` prefix (e.g., `dist/css/app.css`)
 
 #### Scenario: Build excludes webdist when tag is set
 - **GIVEN** the build tag `exclude_webdist` is set

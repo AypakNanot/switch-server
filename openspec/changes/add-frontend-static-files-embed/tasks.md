@@ -1,23 +1,24 @@
 # Implementation Tasks
 
 ## 1. Embed Package Setup
-- [x] 1.1 Create `web/dist/static.go` with `//go:embed *` directive
+- [x] 1.1 Create `web/static.go` with `//go:embed dist/*` directive
 - [x] 1.2 Add build tag to exclude when needed (`//go:build !exclude_webdist`)
 - [x] 1.3 Export `WebFS embed.FS` variable for use by server
+- [x] 1.4 Move from `web/dist/` to `web/` to prevent deletion during frontend rebuilds
 
 ## 2. Static File Serving Routes
-- [x] 2.1 Import `go-admin/web/dist` package in `cmd/api/server.go`
+- [x] 2.1 Import `go-admin/web` package in `cmd/api/server.go`
 - [x] 2.2 Add `strings` package import for path handling
 - [x] 2.3 Create `serveStaticFile` helper function with Content-Type detection
-- [x] 2.4 Add `/css/*filepath` route
-- [x] 2.5 Add `/js/*filepath` route
-- [x] 2.6 Add `/fonts/*filepath` route
-- [x] 2.7 Add `/img/*filepath` route
-- [x] 2.8 Add `/favicon.ico` route
+- [x] 2.4 Add `/css/*filepath` route (reads from `dist/css/*`)
+- [x] 2.5 Add `/js/*filepath` route (reads from `dist/js/*`)
+- [x] 2.6 Add `/fonts/*filepath` route (reads from `dist/fonts/*`)
+- [x] 2.7 Add `/img/*filepath` route (reads from `dist/img/*`)
+- [x] 2.8 Add `/favicon.ico` route (reads from `dist/favicon.ico`)
 
 ## 3. Root and SPA Routes
-- [x] 3.1 Add `/` route to serve `index.html`
-- [x] 3.2 Add `NoRoute` handler for SPA fallback
+- [x] 3.1 Add `/` route to serve `dist/index.html`
+- [x] 3.2 Add `NoRoute` handler for SPA fallback (serves `dist/index.html`)
 - [x] 3.3 Exclude `/api/*` paths from SPA fallback
 - [x] 3.4 Exclude `/swagger/*` paths from SPA fallback
 - [x] 3.5 Exclude `/info` path from SPA fallback
@@ -70,12 +71,12 @@
 ### Files Modified
 
 **Created**:
-- `web/dist/static.go` - Embed package
+- `web/static.go` - Embed package (placed in parent directory to prevent deletion)
 
 **Modified**:
-- `cmd/api/server.go` - Static file routes
+- `cmd/api/server.go` - Static file routes with `dist/` prefix paths
 - `app/admin/router/sys_router.go` - Removed welcome page
-- `.gitignore` - Ignore build artifacts
+- `.gitignore` - Ignore `web/dist/` but preserve `web/static.go`
 
 ### Deployed Binary Size
 - **Before**: ~48MB (without frontend)

@@ -42,14 +42,17 @@ This change enables the project to serve a pre-built Vue.js frontend application
 **Core Tasks**: 8/8 (100%)
 
 1. **Embed Package** ✅
-   - Created `web/dist/static.go` with `//go:embed *` directive
+   - Created `web/static.go` with `//go:embed dist/*` directive
    - Files embedded at compile time from `web/dist/` directory
+   - Source file placed in `web/` (not `web/dist/`) to prevent deletion during frontend rebuilds
+   - Files accessed with `dist/` prefix (e.g., `dist/css/app.css`)
 
 2. **Static File Routes** ✅
    - Added routes for `/css/*`, `/js/*`, `/fonts/*`, `/img/*`
    - Added `/favicon.ico` route
    - Root `/` route serves `index.html`
    - SPA fallback route for client-side routing
+   - All file reads use `dist/` prefix to access embedded filesystem
 
 3. **Welcome Page Removal** ✅
    - Commented out default iframe welcome page in `sys_router.go`
@@ -72,30 +75,41 @@ This change enables the project to serve a pre-built Vue.js frontend application
 
 ### Technical Details
 
-**Frontend File Structure**:
+**Project Structure**:
 ```
-web/dist/
-├── css/          # Stylesheets
-├── js/           # JavaScript bundles
-├── fonts/        # Font files
-├── img/          # Images
-├── index.html    # SPA entry point
-├── favicon.ico   # Site icon
-└── static.go     # Embed package (generated)
+web/
+├── dist/              # Frontend build output (generated)
+│   ├── css/           # Stylesheets
+│   ├── js/            # JavaScript bundles
+│   ├── fonts/         # Font files
+│   ├── img/           # Images
+│   ├── index.html     # SPA entry point
+│   └── favicon.ico    # Site icon
+└── static.go          # Embed package source (preserved)
+```
+
+**Embed File (`web/static.go`)**:
+```go
+package web
+
+import "embed"
+
+//go:embed dist/*
+var WebFS embed.FS
 ```
 
 **Served Routes**:
-| Route Pattern | Description |
-|---------------|-------------|
-| `/` | Serves `index.html` |
-| `/css/*filepath` | CSS files |
-| `/js/*filepath` | JavaScript files |
-| `/fonts/*filepath` | Font files |
-| `/img/*filepath` | Image files |
-| `/favicon.ico` | Favicon |
-| `NoRoute` (fallback) | Returns `index.html` for SPA routes |
-| `/api/*` | API endpoints (passed through) |
-| `/swagger/*` | Swagger docs (passed through) |
+| Route Pattern | Embed File Path | Description |
+|---------------|-----------------|-------------|
+| `/` | `dist/index.html` | Serves `index.html` |
+| `/css/*filepath` | `dist/css/*filepath` | CSS files |
+| `/js/*filepath` | `dist/js/*filepath` | JavaScript files |
+| `/fonts/*filepath` | `dist/fonts/*filepath` | Font files |
+| `/img/*filepath` | `dist/img/*filepath` | Image files |
+| `/favicon.ico` | `dist/favicon.ico` | Favicon |
+| `NoRoute` (fallback) | `dist/index.html` | Returns `index.html` for SPA routes |
+| `/api/*` | N/A | API endpoints (passed through) |
+| `/swagger/*` | N/A | Swagger docs (passed through) |
 
 ### Build Process
 
