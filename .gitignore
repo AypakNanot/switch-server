@@ -21,3 +21,6 @@ cmd/migrate/migration/version-local/*
 # go sum
 go.sum
 config/settings.deva.yml
+
+# Claude Code settings
+.claude/settings.json
