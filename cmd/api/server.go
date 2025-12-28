@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"strings"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -26,6 +27,7 @@ import (
 	common "go-admin/common/middleware"
 	"go-admin/common/middleware/handler"
 	"go-admin/common/storage"
+	"go-admin/web/dist"
 	ext "go-admin/config"
 )
 
@@ -185,4 +187,83 @@ func initRouter() {
 
 	common.InitMiddleware(r)
 
+	// 设置前端静态文件服务 - 直接使用 embed.FS 读取文件
+	// 静态资源路由 (css, js, fonts, img 等)
+	serveStaticFile := func(c *gin.Context, filePath string) {
+		data, err := dist.WebFS.ReadFile(filePath)
+		if err != nil {
+			c.String(http.StatusNotFound, "File not found")
+			return
+		}
+
+		// 设置正确的 Content-Type
+		switch {
+		case strings.HasSuffix(filePath, ".html"):
+			c.Header("Content-Type", "text/html; charset=utf-8")
+		case strings.HasSuffix(filePath, ".css"):
+			c.Header("Content-Type", "text/css; charset=utf-8")
+		case strings.HasSuffix(filePath, ".js"):
+			c.Header("Content-Type", "application/javascript; charset=utf-8")
+		case strings.HasSuffix(filePath, ".json"):
+			c.Header("Content-Type", "application/json; charset=utf-8")
+		case strings.HasSuffix(filePath, ".png"):
+			c.Header("Content-Type", "image/png")
+		case strings.HasSuffix(filePath, ".jpg"), strings.HasSuffix(filePath, ".jpeg"):
+			c.Header("Content-Type", "image/jpeg")
+		case strings.HasSuffix(filePath, ".svg"):
+			c.Header("Content-Type", "image/svg+xml")
+		case strings.HasSuffix(filePath, ".ico"):
+			c.Header("Content-Type", "image/x-icon")
+		case strings.HasSuffix(filePath, ".woff"), strings.HasSuffix(filePath, ".woff2"):
+			c.Header("Content-Type", "font/woff2")
+		}
+		c.Data(http.StatusOK, "", data)
+	}
+
+	r.GET("/css/*filepath", func(c *gin.Context) {
+		filePath := "css" + c.Param("filepath")
+		serveStaticFile(c, filePath)
+	})
+	r.GET("/js/*filepath", func(c *gin.Context) {
+		filePath := "js" + c.Param("filepath")
+		serveStaticFile(c, filePath)
+	})
+	r.GET("/fonts/*filepath", func(c *gin.Context) {
+		filePath := "fonts" + c.Param("filepath")
+		serveStaticFile(c, filePath)
+	})
+	r.GET("/img/*filepath", func(c *gin.Context) {
+		filePath := "img" + c.Param("filepath")
+		serveStaticFile(c, filePath)
+	})
+
+	// favicon.ico
+	r.GET("/favicon.ico", func(c *gin.Context) {
+		serveStaticFile(c, "favicon.ico")
+	})
+
+	// 根路径 - 返回 index.html
+	r.GET("/", func(c *gin.Context) {
+		serveStaticFile(c, "index.html")
+	})
+
+	// SPA 路由支持：所有其他非 API 路由返回 index.html
+	r.NoRoute(func(c *gin.Context) {
+		path := c.Request.URL.Path
+		// 跳过 API 路径和 swagger
+		if len(path) >= 4 && path[:4] == "/api" {
+			c.JSON(http.StatusNotFound, gin.H{"code": 404, "message": "API Not Found"})
+			return
+		}
+		if len(path) >= 8 && path[:8] == "/swagger" {
+			c.JSON(http.StatusNotFound, gin.H{"code": 404, "message": "Swagger Not Found"})
+			return
+		}
+		if path == "/info" {
+			c.JSON(http.StatusNotFound, gin.H{"code": 404, "message": "Not Found"})
+			return
+		}
+		// 返回 index.html
+		serveStaticFile(c, "index.html")
+	})
 }

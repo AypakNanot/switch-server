@@ -24,3 +24,8 @@ config/settings.deva.yml
 
 # Claude Code settings
 .claude/settings.json
+
+# Frontend build artifacts
+web/dist/
+!web/dist/static.go
+!web/dist/embed/*.go

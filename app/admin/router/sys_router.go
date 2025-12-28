@@ -38,9 +38,10 @@ func sysBaseRouter(r *gin.RouterGroup) {
 	go ws.WebsocketManager.SendService()
 	go ws.WebsocketManager.SendAllService()
 
-	if config.ApplicationConfig.Mode != "prod" {
-		r.GET("/", apis.GoAdmin)
-	}
+	// 注释掉欢迎页面路由，使用前端静态文件替代
+	// if config.ApplicationConfig.Mode != "prod" {
+	// 	r.GET("/", apis.GoAdmin)
+	// }
 	r.GET("/info", handler.Ping)
 }
 
