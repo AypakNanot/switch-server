@@ -221,30 +221,30 @@ func initRouter() {
 	}
 
 	r.GET("/css/*filepath", func(c *gin.Context) {
-		filePath := "css" + c.Param("filepath")
+		filePath := "dist/css" + c.Param("filepath")
 		serveStaticFile(c, filePath)
 	})
 	r.GET("/js/*filepath", func(c *gin.Context) {
-		filePath := "js" + c.Param("filepath")
+		filePath := "dist/js" + c.Param("filepath")
 		serveStaticFile(c, filePath)
 	})
 	r.GET("/fonts/*filepath", func(c *gin.Context) {
-		filePath := "fonts" + c.Param("filepath")
+		filePath := "dist/fonts" + c.Param("filepath")
 		serveStaticFile(c, filePath)
 	})
 	r.GET("/img/*filepath", func(c *gin.Context) {
-		filePath := "img" + c.Param("filepath")
+		filePath := "dist/img" + c.Param("filepath")
 		serveStaticFile(c, filePath)
 	})
 
 	// favicon.ico
 	r.GET("/favicon.ico", func(c *gin.Context) {
-		serveStaticFile(c, "favicon.ico")
+		serveStaticFile(c, "dist/favicon.ico")
 	})
 
 	// 根路径 - 返回 index.html
 	r.GET("/", func(c *gin.Context) {
-		serveStaticFile(c, "index.html")
+		serveStaticFile(c, "dist/index.html")
 	})
 
 	// SPA 路由支持：所有其他非 API 路由返回 index.html
@@ -264,6 +264,6 @@ func initRouter() {
 			return
 		}
 		// 返回 index.html
-		serveStaticFile(c, "index.html")
+		serveStaticFile(c, "dist/index.html")
 	})
 }
