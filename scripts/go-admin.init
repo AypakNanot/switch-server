@@ -1,0 +1,224 @@
+#!/bin/sh
+################################################################################
+# go-admin init.d script for traditional init systems
+# 适用于传统 init 系统的 go-admin 初始化脚本
+#
+# Installation:
+#   cp scripts/go-admin.init /etc/init.d/go-admin
+#   chmod +x /etc/init.d/go-admin
+#   /etc/init.d/go-admin enable    # OpenWrt
+#   or
+#   update-rc.d go-admin defaults  # Debian/Ubuntu
+#   chkconfig --add go-admin       # RedHat/CentOS
+#
+################################################################################
+
+# Configuration
+DAEMON="/usr/bin/go-admin"
+CONFIG="/etc/go-admin/settings.yml"
+PIDFILE="/var/run/go-admin.pid"
+LOGFILE="/tmp/go-admin.log"
+
+# Check if binary exists
+if [ ! -x "$DAEMON" ]; then
+    echo "Error: $DAEMON not found or not executable"
+    exit 1
+fi
+
+# Check if config exists
+if [ ! -f "$CONFIG" ]; then
+    echo "Error: $CONFIG not found"
+    echo "Please create a configuration file at $CONFIG"
+    exit 1
+fi
+
+################################################################################
+# Helper Functions / 辅助函数
+################################################################################
+
+# Get PID from file or process name
+get_pid() {
+    if [ -f "$PIDFILE" ]; then
+        cat "$PIDFILE"
+    else
+        pgrep -x "go-admin" | head -1
+    fi
+}
+
+# Check if service is running
+is_running() {
+    PID=$(get_pid)
+    if [ -n "$PID" ] && kill -0 "$PID" 2>/dev/null; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+# Wait for process to stop
+wait_stop() {
+    local timeout=10
+    local count=0
+    while is_running && [ $count -lt $timeout ]; do
+        sleep 1
+        count=$((count + 1))
+    done
+    ! is_running
+}
+
+################################################################################
+# Service Actions / 服务操作
+################################################################################
+
+# Start the service
+do_start() {
+    echo "Starting go-admin..."
+
+    if is_running; then
+        echo "go-admin is already running (PID: $(get_pid))"
+        return 0
+    fi
+
+    # Start the daemon
+    # Note: Some systems use start-stop-daemon, others use daemon command
+    if command -v start-stop-daemon >/dev/null 2>&1; then
+        start-stop-daemon -S -x "$DAEMON" \
+            -- server -c "$CONFIG" -p "$PIDFILE" \
+            >> "$LOGFILE" 2>&1 &
+    else
+        # Fallback: nohup method
+        nohup "$DAEMON" server -c "$CONFIG" \
+            -p "$PIDFILE" >> "$LOGFILE" 2>&1 &
+    fi
+
+    # Wait for startup
+    sleep 2
+
+    if is_running; then
+        echo "go-admin started successfully (PID: $(get_pid))"
+        return 0
+    else
+        echo "Failed to start go-admin"
+        echo "Check log: $LOGFILE"
+        return 1
+    fi
+}
+
+# Stop the service
+do_stop() {
+    echo "Stopping go-admin..."
+
+    if ! is_running; then
+        echo "go-admin is not running"
+        return 0
+    fi
+
+    PID=$(get_pid)
+    echo "Stopping go-admin (PID: $PID)..."
+
+    # Try graceful shutdown first
+    kill -TERM "$PID" 2>/dev/null
+
+    # Wait for process to stop
+    if wait_stop; then
+        echo "go-admin stopped successfully"
+        rm -f "$PIDFILE"
+        return 0
+    else
+        # Force kill if graceful shutdown failed
+        echo "Graceful shutdown failed, forcing..."
+        kill -KILL "$PID" 2>/dev/null
+        sleep 1
+        rm -f "$PIDFILE"
+        echo "go-admin stopped (forced)"
+        return 0
+    fi
+}
+
+# Restart the service
+do_restart() {
+    echo "Restarting go-admin..."
+    do_stop
+    sleep 2
+    do_start
+}
+
+# Show service status
+do_status() {
+    if is_running; then
+        PID=$(get_pid)
+        echo "go-admin is running (PID: $PID)"
+        echo ""
+        echo "Process info:"
+        ps | grep "$PID" | grep -v grep || true
+        echo ""
+        echo "Memory usage:"
+        free 2>/dev/null || echo "Cannot get memory info"
+        echo ""
+        echo "Network ports:"
+        netstat -tlnp 2>/dev/null | grep go-admin || \
+        netstat -an 2>/dev/null | grep 8000 || \
+        echo "Cannot get network info"
+        return 0
+    else
+        echo "go-admin is not running"
+        return 1
+    fi
+}
+
+# Show recent logs
+do_logs() {
+    if [ -f "$LOGFILE" ]; then
+        tail -50 "$LOGFILE"
+    else
+        echo "Log file not found: $LOGFILE"
+    fi
+}
+
+# Follow logs (tail -f)
+do_logs_follow() {
+    if [ -f "$LOGFILE" ]; then
+        tail -f "$LOGFILE"
+    else
+        echo "Log file not found: $LOGFILE"
+    fi
+}
+
+################################################################################
+# Main Entry Point / 主入口
+################################################################################
+
+case "$1" in
+    start)
+        do_start
+        ;;
+    stop)
+        do_stop
+        ;;
+    restart|reload|force-reload)
+        do_restart
+        ;;
+    status)
+        do_status
+        ;;
+    logs)
+        do_logs
+        ;;
+    logs-follow)
+        do_logs_follow
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart|status|logs|logs-follow}"
+        echo ""
+        echo "Commands:"
+        echo "  start         - Start the go-admin service"
+        echo "  stop          - Stop the go-admin service"
+        echo "  restart       - Restart the go-admin service"
+        echo "  status        - Show service status"
+        echo "  logs          - Show recent logs"
+        echo "  logs-follow   - Follow logs in real-time"
+        exit 1
+        ;;
+esac
+
+exit $?

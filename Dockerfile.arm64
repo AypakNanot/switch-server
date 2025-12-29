@@ -1,0 +1,38 @@
+FROM --platform=linux/arm64 alpine:latest
+
+# 设置时区
+ENV TZ=Asia/Shanghai
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && \
+    apk update --no-cache && \
+    apk add --no-cache ca-certificates tzdata wget
+
+# 创建工作目录
+WORKDIR /app
+
+# 复制二进制文件
+COPY go-admin-arm64 /app/go-admin
+RUN chmod +x /app/go-admin
+
+# 复制配置文件和数据库初始化脚本
+COPY config/settings.switch.yml /app/config/settings.yml
+COPY config/db.sql /app/config/db.sql
+
+# 复制数据库（可选）
+# COPY go-admin-db.db /app/go-admin-db.db
+
+# 复制启动脚本
+COPY scripts/docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
+
+# 创建日志和数据库目录
+RUN mkdir -p /tmp/go-admin/logs
+
+# 暴露端口
+EXPOSE 8000
+
+# 健康检查
+HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \
+    CMD wget --no-verbose --tries=1 --spider http://localhost:8000/ || exit 1
+
+# 使用 entrypoint 脚本（自动初始化数据库）
+ENTRYPOINT ["/docker-entrypoint.sh"]

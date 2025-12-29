@@ -1,0 +1,36 @@
+[Unit]
+Description=Go-Admin Application Server
+Documentation=https://github.com/go-admin-team/go-admin
+After=network.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+
+# Working directory (where the binary is located)
+WorkingDirectory=/usr/bin
+
+# ExecStart: Command to start the service
+# - Use the switch-optimized configuration
+# - Adjust path if using different config location
+ExecStart=/usr/bin/go-admin server -c /etc/go-admin/settings.yml
+
+# Automatic restart on failure
+Restart=on-failure
+RestartSec=5
+
+# Output logging to systemd journal
+StandardOutput=journal
+StandardError=journal
+
+# Security hardening (optional, may not work on all embedded systems)
+# NoNewPrivileges=true
+# PrivateTmp=true
+
+# Resource limits (adjust based on available memory)
+# MemoryLimit=128M
+# MemoryMax=256M
+
+[Install]
+WantedBy=multi-user.target

@@ -24,8 +24,18 @@ config/settings.deva.yml
 
 # Claude Code settings
 .claude/settings.json
+.claude/settings.local.json
 
 # Frontend build artifacts
 web/dist/
 # Preserve embed source file in parent directory
 !web/static.go
+
+# Cross-compiled binaries
+go-admin-arm*
+go-admin-mips*
+go-admin-ppc*
+
+# SQLite database files
+*.db
+*-db.db
