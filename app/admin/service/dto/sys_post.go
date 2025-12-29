@@ -1,10 +1,10 @@
 package dto
 
 import (
-	"go-admin/app/admin/models"
-	common "go-admin/common/models"
+	"opt-switch/app/admin/models"
+	common "opt-switch/common/models"
 
-	"go-admin/common/dto"
+	"opt-switch/common/dto"
 )
 
 // SysPostPageReq 列表或者搜索使用结构体

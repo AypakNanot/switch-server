@@ -3,9 +3,9 @@ package service
 import (
 	"errors"
 
-	"go-admin/app/admin/models"
-	"go-admin/app/admin/service/dto"
-	cDto "go-admin/common/dto"
+	"opt-switch/app/admin/models"
+	"opt-switch/app/admin/service/dto"
+	cDto "opt-switch/common/dto"
 
 	"github.com/go-admin-team/go-admin-core/sdk/service"
 	"gorm.io/gorm"

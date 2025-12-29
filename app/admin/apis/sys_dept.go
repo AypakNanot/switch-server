@@ -7,10 +7,10 @@ import (
 	"github.com/go-admin-team/go-admin-core/sdk/pkg"
 	"github.com/go-admin-team/go-admin-core/sdk/pkg/jwtauth/user"
 	_ "github.com/go-admin-team/go-admin-core/sdk/pkg/response"
-	"go-admin/app/admin/models"
+	"opt-switch/app/admin/models"
 
-	"go-admin/app/admin/service"
-	"go-admin/app/admin/service/dto"
+	"opt-switch/app/admin/service"
+	"opt-switch/app/admin/service/dto"
 )
 
 type SysDept struct {

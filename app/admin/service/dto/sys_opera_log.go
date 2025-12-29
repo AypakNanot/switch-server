@@ -3,9 +3,9 @@ package dto
 import (
 	"time"
 
-	"go-admin/app/admin/models"
-	"go-admin/common/dto"
-	common "go-admin/common/models"
+	"opt-switch/app/admin/models"
+	"opt-switch/common/dto"
+	common "opt-switch/common/models"
 )
 
 const (

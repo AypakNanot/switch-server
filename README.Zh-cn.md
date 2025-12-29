@@ -1,31 +1,31 @@
-# go-admin
+# opt-switch
 
-  <img align="right" width="320" src="https://doc-image.zhangwj.com/img/go-admin.svg">
+  <img align="right" width="320" src="https://doc-image.zhangwj.com/img/opt-switch.svg">
 
 
-[![Build Status](https://github.com/wenjianzhang/go-admin/workflows/build/badge.svg)](https://github.com/go-admin-team/go-admin)
-[![Release](https://img.shields.io/github/release/go-admin-team/go-admin.svg?style=flat-square)](https://github.com/go-admin-team/go-admin/releases)
-[![License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/go-admin-team/go-admin)
+[![Build Status](https://github.com/wenjianzhang/opt-switch/workflows/build/badge.svg)](https://github.com/opt-switch-team/opt-switch)
+[![Release](https://img.shields.io/github/release/opt-switch-team/opt-switch.svg?style=flat-square)](https://github.com/opt-switch-team/opt-switch/releases)
+[![License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/opt-switch-team/opt-switch)
 
-[English](https://github.com/go-admin-team/go-admin/blob/master/README.md) | 简体中文
+[English](https://github.com/opt-switch-team/opt-switch/blob/master/README.md) | 简体中文
 
 基于Gin + Vue + Element UI OR Arco Design OR Ant Design的前后端分离权限管理系统,系统初始化极度简单，只需要配置文件中，修改数据库连接，系统支持多指令操作，迁移指令可以让初始化数据库信息变得更简单，服务指令可以很简单的启动api服务
 
-[在线文档](https://www.go-admin.pro)
+[在线文档](https://www.opt-switch.pro)
 
-[前端项目](https://github.com/go-admin-team/go-admin-ui)
+[前端项目](https://github.com/opt-switch-team/opt-switch-ui)
 
 [视频教程](https://space.bilibili.com/565616721/channel/detail?cid=125737)
 
 ## 🎬 在线体验
 
-Element UI vue体验：[https://vue2.go-admin.dev](https://vue2.go-admin.dev/#/login)
+Element UI vue体验：[https://vue2.opt-switch.dev](https://vue2.opt-switch.dev/#/login)
 > ⚠️⚠️⚠️ 账号 / 密码： admin / 123456
 
-Arco Design vue3 demo：[https://vue3.go-admin.dev](https://vue3.go-admin.dev/#/login)
+Arco Design vue3 demo：[https://vue3.opt-switch.dev](https://vue3.opt-switch.dev/#/login)
 > ⚠️⚠️⚠️ 账号 / 密码： admin / 123456
 
-antd体验：[https://antd.go-admin.pro](https://antd.go-admin.pro/)
+antd体验：[https://antd.opt-switch.pro](https://antd.opt-switch.pro/)
 > ⚠️⚠️⚠️ 账号 / 密码： admin / 123456
 
 ## ✨ 特性
@@ -79,7 +79,7 @@ antd体验：[https://antd.go-admin.pro](https://antd.go-admin.pro/)
 
 同时配套了系列教程包含视频和文档，如何从下载完成到熟练使用，强烈建议大家先看完这些教程再来实践本项目！！！
 
-### 轻松实现go-admin写出第一个应用 - 文档教程
+### 轻松实现opt-switch写出第一个应用 - 文档教程
 
 [步骤一 - 基础内容介绍](https://doc.zhangwj.com/guide/intro/tutorial01.html)
 
@@ -87,7 +87,7 @@ antd体验：[https://antd.go-admin.pro](https://antd.go-admin.pro/)
 
 ### 手把手教你从入门到放弃 - 视频教程
 
-[如何启动go-admin](https://www.bilibili.com/video/BV1z5411x7JG)
+[如何启动opt-switch](https://www.bilibili.com/video/BV1z5411x7JG)
 
 [使用生成工具轻松实现业务](https://www.bilibili.com/video/BV1Dg4y1i79D)
 
@@ -95,13 +95,13 @@ antd体验：[https://antd.go-admin.pro](https://antd.go-admin.pro/)
 
 [多命令启动方式讲解以及IDE配置](https://www.bilibili.com/video/BV1Fg4y1q7ph)
 
-[go-admin菜单的配置说明](https://www.bilibili.com/video/BV1Wp4y1D715) [必看]
+[opt-switch菜单的配置说明](https://www.bilibili.com/video/BV1Wp4y1D715) [必看]
 
 [如何配置菜单信息以及接口信息](https://www.bilibili.com/video/BV1zv411B7nG) [必看]
 
-[go-admin权限配置使用说明](https://www.bilibili.com/video/BV1rt4y197d3) [必看]
+[opt-switch权限配置使用说明](https://www.bilibili.com/video/BV1rt4y197d3) [必看]
 
-[go-admin数据权限使用说明](https://www.bilibili.com/video/BV1LK4y1s71e) [必看]
+[opt-switch数据权限使用说明](https://www.bilibili.com/video/BV1LK4y1s71e) [必看]
 
 **如有问题请先看上述使用文档和文章，若不能满足，欢迎 issue 和 pr ，视频教程和文档持续更新中**
 
@@ -134,10 +134,10 @@ cd goadmin
 
 ```bash
 # 获取后端代码
-git clone https://github.com/go-admin-team/go-admin.git
+git clone https://github.com/opt-switch-team/opt-switch.git
 
 # 获取前端代码
-git clone https://github.com/go-admin-team/go-admin-ui.git
+git clone https://github.com/opt-switch-team/opt-switch-ui.git
 
 ```
 
@@ -148,8 +148,8 @@ git clone https://github.com/go-admin-team/go-admin-ui.git
 项目默认使用 SQLite3 数据库，**无需安装 MySQL 或其他数据库服务**，使用纯 Go SQLite 驱动，**无需 CGO**，开箱即用！
 
 ```bash
-# 进入 go-admin 后端项目
-cd ./go-admin
+# 进入 opt-switch 后端项目
+cd ./opt-switch
 
 # 更新整理依赖
 go mod tidy
@@ -158,10 +158,10 @@ go mod tidy
 go build
 
 # 初始化数据库（首次运行）
-./go-admin migrate -c config/settings.yml
+./opt-switch migrate -c config/settings.yml
 
 # 启动服务
-./go-admin server -c config/settings.yml
+./opt-switch server -c config/settings.yml
 ```
 
 **Windows 用户**：
@@ -170,10 +170,10 @@ go build
 go build
 
 # 初始化数据库
-go-admin.exe migrate -c config/settings.yml
+opt-switch.exe migrate -c config/settings.yml
 
 # 启动服务
-go-admin.exe server -c config/settings.yml
+opt-switch.exe server -c config/settings.yml
 ```
 
 ✅ **无需安装 GCC 或其他 C 编译器**，使用纯 Go 实现的 SQLite 驱动 `github.com/glebarez/sqlite`，基于 `modernc.org/sqlite`，完全兼容标准 SQLite。
@@ -201,8 +201,8 @@ go-admin.exe server -c config/settings.yml
 
 3. **确保数据库服务已启动**，然后初始化并启动：
    ```bash
-   ./go-admin migrate -c config/settings.yml
-   ./go-admin server -c config/settings.yml
+   ./opt-switch migrate -c config/settings.yml
+   ./opt-switch server -c config/settings.yml
    ```
 
 **数据库配置文件说明**：
@@ -220,18 +220,18 @@ go-admin.exe server -c config/settings.yml
 
 在项目启动时，使用`-a true` 系统会自动添加缺少的接口数据
 ```bash
-./go-admin server -c config/settings.yml -a true
+./opt-switch server -c config/settings.yml -a true
 ```
 
 #### 使用docker 编译启动
 
 ```shell
 # 编译镜像
-docker build -t go-admin .
+docker build -t opt-switch .
 
-# 启动容器，第一个go-admin是容器名字，第二个go-admin是镜像名称
+# 启动容器，第一个opt-switch是容器名字，第二个opt-switch是镜像名称
 # -v 映射配置文件 本地路径：容器路径
-docker run --name go-admin -p 8000:8000 -v /config/settings.yml:/config/settings.yml -d go-admin-server
+docker run --name opt-switch -p 8000:8000 -v /config/settings.yml:/config/settings.yml -d opt-switch-server
 ```
 
 #### 文档生成
@@ -276,7 +276,7 @@ npm run dev
   <tr>
     <td>微信</td>
     <td>公众号🔥🔥🔥</td>
-    <td><a target="_blank" href="https://shang.qq.com/wpa/qunwpa?idkey=0f2bf59f5f2edec6a4550c364242c0641f870aa328e468c4ee4b7dbfb392627b"><img border="0" src="https://pub.idqqimg.com/wpa/images/group.png" alt="go-admin技术交流乙号" title="go-admin技术交流乙号"></a></td>
+    <td><a target="_blank" href="https://shang.qq.com/wpa/qunwpa?idkey=0f2bf59f5f2edec6a4550c364242c0641f870aa328e468c4ee4b7dbfb392627b"><img border="0" src="https://pub.idqqimg.com/wpa/images/group.png" alt="opt-switch技术交流乙号" title="opt-switch技术交流乙号"></a></td>
     <td>哔哩哔哩🔥🔥🔥</td>
   </tr>
 </table>
@@ -331,7 +331,7 @@ npm run dev
 
 ## JetBrains 开源证书支持
 
-`go-admin` 项目一直以来都是在 JetBrains 公司旗下的 GoLand 集成开发环境中进行开发，基于 **free JetBrains Open Source license(s)** 正版免费授权，在此表达我的谢意。
+`opt-switch` 项目一直以来都是在 JetBrains 公司旗下的 GoLand 集成开发环境中进行开发，基于 **free JetBrains Open Source license(s)** 正版免费授权，在此表达我的谢意。
 
 <a href="https://www.jetbrains.com/?from=kubeadm-ha" target="_blank"><img src="https://raw.githubusercontent.com/panjf2000/illustrations/master/jetbrains/jetbrains-variant-4.png" width="250" align="middle"/></a>
 
@@ -364,6 +364,6 @@ npm run dev
 
 ## 🔑 License
 
-[MIT](https://github.com/go-admin-team/go-admin/blob/master/LICENSE.md)
+[MIT](https://github.com/opt-switch-team/opt-switch/blob/master/LICENSE.md)
 
 Copyright (c) 2024 wenjianzhang

@@ -5,7 +5,7 @@
 # 适用于网络交换机、路由器等嵌入式设备
 #
 # 使用方法:
-#   ./go-admin server -c config/settings.switch.yml
+#   ./opt-switch server -c config/settings.switch.yml
 
 settings:
   application:
@@ -27,7 +27,7 @@ settings:
 
   logger:
     # 日志存放路径 - 使用 /tmp 避免写闪存
-    path: /tmp/go-admin/logs
+    path: /tmp/opt-switch/logs
 
     # 控制台日志 - 启用以避免文件 I/O
     stdout: '1'
@@ -41,7 +41,7 @@ settings:
 
   jwt:
     # token 密钥 - 生产环境请务必修改
-    secret: go-admin
+    secret: opt-switch
 
     # token 过期时间（秒）
     timeout: 3600
@@ -51,7 +51,7 @@ settings:
     driver: sqlite3
 
     # 数据库文件路径 - 使用 /tmp 或外部存储
-    source: /tmp/go-admin-db.db
+    source: /tmp/opt-switch-db.db
 
     # 数据库连接池配置 - 针对低内存优化
     # 注意: glebarez/sqlite 使用纯 Go 实现

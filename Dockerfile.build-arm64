@@ -1,0 +1,55 @@
+# 多阶段构建 Dockerfile - ARM64 版本
+# 使用 Go 1.20.14 编译
+
+# 构建阶段
+FROM --platform=linux/arm64 golang:1.20.14-alpine AS builder
+
+# 设置工作目录
+WORKDIR /build
+
+# 安装必要的工具
+RUN apk add --no-cache git ca-certificates tzdata
+
+# 复制 go mod 文件
+COPY go.mod go.sum ./
+RUN go mod download
+
+# 复制源代码
+COPY . .
+
+# 编译 ARM64 二进制文件
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build \
+    -ldflags="-w -s" \
+    -o opt-switch-arm64 .
+
+# 运行阶段
+FROM --platform=linux/arm64 alpine:latest
+
+# 设置时区
+ENV TZ=Asia/Shanghai
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && \
+    apk update --no-cache && \
+    apk add --no-cache ca-certificates tzdata wget
+
+# 创建工作目录
+WORKDIR /app
+
+# 从构建阶段复制二进制文件
+COPY --from=builder /build/opt-switch-arm64 /app/opt-switch
+RUN chmod +x /app/opt-switch
+
+# 复制配置文件
+COPY config/settings.yml /app/config/settings.yml
+
+# 创建日志目录
+RUN mkdir -p /tmp/opt-switch/logs
+
+# 暴露端口
+EXPOSE 8000
+
+# 健康检查
+HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \
+    CMD wget --no-verbose --tries=1 --spider http://localhost:8000/ || exit 1
+
+# 启动应用
+CMD ["/app/opt-switch", "server", "-c", "/app/config/settings.yml"]

@@ -1,32 +1,32 @@
 
-# go-admin
+# opt-switch
 
-<img align="right" width="320" src="https://doc-image.zhangwj.com/img/go-admin.svg">
+<img align="right" width="320" src="https://doc-image.zhangwj.com/img/opt-switch.svg">
 
 
-[![Build Status](https://github.com/wenjianzhang/go-admin/workflows/build/badge.svg)](https://github.com/go-admin-team/go-admin)
-[![Release](https://img.shields.io/github/release/go-admin-team/go-admin.svg?style=flat-square)](https://github.com/go-admin-team/go-admin/releases)
-[![License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/go-admin-team/go-admin)
+[![Build Status](https://github.com/wenjianzhang/opt-switch/workflows/build/badge.svg)](https://github.com/opt-switch-team/opt-switch)
+[![Release](https://img.shields.io/github/release/opt-switch-team/opt-switch.svg?style=flat-square)](https://github.com/opt-switch-team/opt-switch/releases)
+[![License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/opt-switch-team/opt-switch)
 
-English | [简体中文](https://github.com/go-admin-team/go-admin/blob/master/README.Zh-cn.md)
+English | [简体中文](https://github.com/opt-switch-team/opt-switch/blob/master/README.Zh-cn.md)
 
 The front-end and back-end separation authority management system based on Gin + Vue + Element UI OR Arco Design is extremely simple to initialize the system. You only need to modify the database connection in the configuration file. The system supports multi-instruction operations. Migration instructions can make it easier to initialize database information. Service instructions It's easy to start the api service.
 
-[documentation](https://www.go-admin.dev)
+[documentation](https://www.opt-switch.dev)
 
-[Front-end project](https://github.com/go-admin-team/go-admin-ui)
+[Front-end project](https://github.com/opt-switch-team/opt-switch-ui)
 
 [Video tutorial](https://space.bilibili.com/565616721/channel/detail?cid=125737)
 
 ## 🎬 Online Demo
 
-Element UI vue demo：[https://vue2.go-admin.dev](https://vue2.go-admin.dev/#/login)
+Element UI vue demo：[https://vue2.opt-switch.dev](https://vue2.opt-switch.dev/#/login)
 > 账号 / 密码： admin / 123456
 
-Arco Design vue3 demo：[https://vue3.go-admin.dev](https://vue3.go-admin.dev/#/login)
+Arco Design vue3 demo：[https://vue3.opt-switch.dev](https://vue3.opt-switch.dev/#/login)
 > 账号 / 密码： admin / 123456
 
-antd demo：[https://antd.go-admin.pro](https://antd.go-admin.pro/)
+antd demo：[https://antd.opt-switch.pro](https://antd.opt-switch.pro/)
 > 账号 / 密码： admin / 123456
 > 
 ## ✨ Feature
@@ -77,7 +77,7 @@ You need to install locally [go] [gin] [node](http://nodejs.org/) 和 [git](http
 
 At the same time, a series of tutorials including videos and documents are provided. How to complete the downloading to the proficient use, it is strongly recommended that you read these tutorials before you practice this project! ! !
 
-### Easily implement go-admin to write the first application-documentation tutorial
+### Easily implement opt-switch to write the first application-documentation tutorial
 
 [Step 1 - basic content introduction](https://doc.zhangwj.com/guide/intro/tutorial01.html)
 
@@ -85,7 +85,7 @@ At the same time, a series of tutorials including videos and documents are provi
 
 ### Teach you from getting started to giving up-video tutorial
 
-[How to start go-admin](https://www.bilibili.com/video/BV1z5411x7JG)
+[How to start opt-switch](https://www.bilibili.com/video/BV1z5411x7JG)
 
 [Easily implement business using build tools](https://www.bilibili.com/video/BV1Dg4y1i79D)
 
@@ -93,13 +93,13 @@ At the same time, a series of tutorials including videos and documents are provi
 
 [Explanation of multi-command startup mode and IDE configuration](https://www.bilibili.com/video/BV1Fg4y1q7ph)
 
-[Configuration instructions for go-admin menu](https://www.bilibili.com/video/BV1Wp4y1D715) [Must see]
+[Configuration instructions for opt-switch menu](https://www.bilibili.com/video/BV1Wp4y1D715) [Must see]
 
 [How to configure menu information and interface information](https://www.bilibili.com/video/BV1zv411B7nG) [Must see]
 
-[go-admin permission configuration instructions](https://www.bilibili.com/video/BV1rt4y197d3) [Must see]
+[opt-switch permission configuration instructions](https://www.bilibili.com/video/BV1rt4y197d3) [Must see]
 
-[Instructions for use of go-admin data permissions](https://www.bilibili.com/video/BV1LK4y1s71e) [Must see]
+[Instructions for use of opt-switch data permissions](https://www.bilibili.com/video/BV1LK4y1s71e) [Must see]
 
 **If you have any questions, please read the above-mentioned usage documents and articles first. If you are not satisfied, welcome to issue and pr. Video tutorials and documents are being updated continuously.**
 
@@ -132,10 +132,10 @@ cd goadmin
 
 ```bash
 # Get backend code
-git clone https://github.com/go-admin-team/go-admin.git
+git clone https://github.com/opt-switch-team/opt-switch.git
 
 # Get the front-end code
-git clone https://github.com/go-admin-team/go-admin-ui.git
+git clone https://github.com/opt-switch-team/opt-switch-ui.git
 
 ```
 
@@ -146,8 +146,8 @@ git clone https://github.com/go-admin-team/go-admin-ui.git
 The project uses SQLite3 as the default database, **no need to install MySQL or other database services**, and **no CGO required**! We use pure Go SQLite driver (`github.com/glebarez/sqlite`), works out of the box.
 
 ```bash
-# Enter the go-admin backend project
-cd ./go-admin
+# Enter the opt-switch backend project
+cd ./opt-switch
 
 # Update dependencies
 go mod tidy
@@ -156,10 +156,10 @@ go mod tidy
 go build
 
 # Initialize database (first time only)
-./go-admin migrate -c config/settings.yml
+./opt-switch migrate -c config/settings.yml
 
 # Start the service
-./go-admin server -c config/settings.yml
+./opt-switch server -c config/settings.yml
 ```
 
 **Windows Users**:
@@ -168,10 +168,10 @@ go build
 go build
 
 # Initialize database
-go-admin.exe migrate -c config/settings.yml
+opt-switch.exe migrate -c config/settings.yml
 
 # Start service
-go-admin.exe server -c config/settings.yml
+opt-switch.exe server -c config/settings.yml
 ```
 
 ✅ **No GCC or C compiler required** - Uses pure Go SQLite implementation based on `modernc.org/sqlite`, fully compatible with standard SQLite.
@@ -199,8 +199,8 @@ If you need to use MySQL or PostgreSQL (recommended for production):
 
 3. **Make sure database service is running**, then initialize and start:
    ```bash
-   ./go-admin migrate -c config/settings.yml
-   ./go-admin server -c config/settings.yml
+   ./opt-switch migrate -c config/settings.yml
+   ./opt-switch server -c config/settings.yml
    ```
 
 **Database configuration files**:
@@ -217,7 +217,7 @@ If you need to use MySQL or PostgreSQL (recommended for production):
 :::tip ⚠️Note that this problem will occur if CGO is not installed in the windows10+ environment;
 
 ```bash
-E:\go-admin>go build
+E:\opt-switch>go build
 # github.com/mattn/go-sqlite3
 cgo: exec /missing-cc: exec: "/missing-cc": file does not exist
 ```
@@ -225,12 +225,12 @@ cgo: exec /missing-cc: exec: "/missing-cc": file does not exist
 or
 
 ```bash
-D:\Code\go-admin>go build
+D:\Code\opt-switch>go build
 # github.com/mattn/go-sqlite3
 cgo: exec gcc: exec: "gcc": executable file not found in %PATH%
 ```
 
-[Solve the cgo problem and enter](https://doc.go-admin.dev/guide/faq#cgo-%E7%9A%84%E9%97%AE%E9%A2%98)
+[Solve the cgo problem and enter](https://doc.opt-switch.dev/guide/faq#cgo-%E7%9A%84%E9%97%AE%E9%A2%98)
 
 :::
 
@@ -239,29 +239,29 @@ cgo: exec gcc: exec: "gcc": executable file not found in %PATH%
 ``` bash
 # The first configuration needs to initialize the database resource information
 # Use under macOS or linux
-$ ./go-admin migrate -c config/settings.dev.yml
+$ ./opt-switch migrate -c config/settings.dev.yml
 
 # ⚠️Note: Use under windows
-$ go-admin.exe migrate -c config/settings.dev.yml
+$ opt-switch.exe migrate -c config/settings.dev.yml
 
 # Start the project, you can also use the IDE for debugging
 # Use under macOS or linux
-$ ./go-admin server -c config/settings.yml
+$ ./opt-switch server -c config/settings.yml
 
 # ⚠️Note: Use under windows
-$ go-admin.exe server -c config/settings.yml
+$ opt-switch.exe server -c config/settings.yml
 ```
 
 #### Use docker to compile and start
 
 ```shell
 # Compile the image
-docker build -t go-admin .
+docker build -t opt-switch .
 
 
-# Start the container, the first go-admin is the container name, and the second go-admin is the image name
+# Start the container, the first opt-switch is the container name, and the second opt-switch is the image name
 # -v Mapping configuration file Local path: container path
-docker run --name go-admin -p 8000:8000 -v /config/settings.yml:/config/settings.yml -d go-admin-server
+docker run --name opt-switch -p 8000:8000 -v /config/settings.yml:/config/settings.yml -d opt-switch-server
 ```
 
 
@@ -304,7 +304,7 @@ npm run dev
   <tr>
     <td>Wechat</td>
     <td>Wechat公众号🔥🔥🔥</td>
-    <td><a target="_blank" href="https://shang.qq.com/wpa/qunwpa?idkey=0f2bf59f5f2edec6a4550c364242c0641f870aa328e468c4ee4b7dbfb392627b"><img border="0" src="https://pub.idqqimg.com/wpa/images/group.png" alt="go-admin技术交流乙号" title="go-admin技术交流乙号"></a></td>
+    <td><a target="_blank" href="https://shang.qq.com/wpa/qunwpa?idkey=0f2bf59f5f2edec6a4550c364242c0641f870aa328e468c4ee4b7dbfb392627b"><img border="0" src="https://pub.idqqimg.com/wpa/images/group.png" alt="opt-switch技术交流乙号" title="opt-switch技术交流乙号"></a></td>
     <td>bilibili🔥🔥🔥</td>
   </tr>
 </table>
@@ -360,7 +360,7 @@ npm run dev
 
 ## JetBrains open source certificate support
 
-The `go-admin` project has always been developed in the GoLand integrated development environment under JetBrains, based on the **free JetBrains Open Source license(s)** genuine free license. I would like to express my gratitude.
+The `opt-switch` project has always been developed in the GoLand integrated development environment under JetBrains, based on the **free JetBrains Open Source license(s)** genuine free license. I would like to express my gratitude.
 
 <a href="https://www.jetbrains.com/?from=kubeadm-ha" target="_blank"><img src="https://raw.githubusercontent.com/panjf2000/illustrations/master/jetbrains/jetbrains-variant-4.png" width="250" align="middle"/></a>
 
@@ -393,6 +393,6 @@ The `go-admin` project has always been developed in the GoLand integrated develo
 
 ## 🔑 License
 
-[MIT](https://github.com/go-admin-team/go-admin/blob/master/LICENSE.md)
+[MIT](https://github.com/opt-switch-team/opt-switch/blob/master/LICENSE.md)
 
 Copyright (c) 2022 wenjianzhang

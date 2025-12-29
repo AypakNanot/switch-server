@@ -4,16 +4,16 @@ import (
 	"errors"
 	"fmt"
 	"github.com/go-admin-team/go-admin-core/sdk/pkg"
-	"go-admin/cmd/app"
-	"go-admin/common/global"
+	"opt-switch/cmd/app"
+	"opt-switch/common/global"
 	"os"
 
 	"github.com/spf13/cobra"
 
-	"go-admin/cmd/api"
-	"go-admin/cmd/config"
-	"go-admin/cmd/migrate"
-	"go-admin/cmd/version"
+	"opt-switch/cmd/api"
+	"opt-switch/cmd/config"
+	"opt-switch/cmd/migrate"
+	"opt-switch/cmd/version"
 )
 
 var rootCmd = &cobra.Command{

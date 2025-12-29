@@ -1,8 +1,8 @@
 package router
 
 import (
-	"go-admin/app/admin/apis"
-	"go-admin/common/middleware"
+	"opt-switch/app/admin/apis"
+	"opt-switch/common/middleware"
 
 	"github.com/gin-gonic/gin"
 	jwt "github.com/go-admin-team/go-admin-core/sdk/pkg/jwtauth"

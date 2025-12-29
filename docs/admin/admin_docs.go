@@ -13,7 +13,7 @@ const docTemplateadmin = `{
         "contact": {},
         "license": {
             "name": "MIT",
-            "url": "https://github.com/go-admin-team/go-admin/blob/master/LICENSE.md"
+            "url": "https://github.com/go-admin-team/opt-switch/blob/master/LICENSE.md"
         },
         "version": "{{.Version}}"
     },

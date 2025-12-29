@@ -1,7 +1,7 @@
 package test
 
 import (
-	//"go-admin/models/tools"
+	//"opt-switch/models/tools"
 	//"os"
 	"testing"
 	//"text/template"

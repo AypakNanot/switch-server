@@ -14,7 +14,18 @@
       "Bash(env CGO_ENABLED=1 go build:*)",
       "Bash(go clean:*)",
       "Bash(timeout:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(find:*)",
+      "Bash(./opt-switch.exe:*)",
+      "Bash(docker stop:*)",
+      "Bash(docker rm:*)",
+      "Bash(curl:*)",
+      "Bash(kill:*)",
+      "Bash(env CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build:*)",
+      "Bash(docker logs:*)",
+      "Bash(docker build:*)",
+      "Bash(docker run:*)",
+      "Bash(docker exec:*)"
     ],
     "deny": [],
     "ask": []

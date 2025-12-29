@@ -1,4 +1,4 @@
-module go-admin
+module opt-switch
 
 go 1.24
 

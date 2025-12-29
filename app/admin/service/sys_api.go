@@ -6,11 +6,11 @@ import (
 
 	"github.com/go-admin-team/go-admin-core/sdk/runtime"
 	"github.com/go-admin-team/go-admin-core/sdk/service"
-	"go-admin/app/admin/models"
-	"go-admin/app/admin/service/dto"
-	"go-admin/common/actions"
-	cDto "go-admin/common/dto"
-	"go-admin/common/global"
+	"opt-switch/app/admin/models"
+	"opt-switch/app/admin/service/dto"
+	"opt-switch/common/actions"
+	cDto "opt-switch/common/dto"
+	"opt-switch/common/global"
 )
 
 type SysApi struct {

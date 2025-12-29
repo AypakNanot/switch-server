@@ -9,8 +9,8 @@ import (
 	"github.com/go-admin-team/go-admin-core/sdk/pkg/jwtauth/user"
 	"github.com/go-admin-team/go-admin-core/sdk/pkg/response"
 
-	"go-admin/common/dto"
-	"go-admin/common/models"
+	"opt-switch/common/dto"
+	"opt-switch/common/models"
 )
 
 // DeleteAction 通用删除动作

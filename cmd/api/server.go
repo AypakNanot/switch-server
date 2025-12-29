@@ -19,16 +19,16 @@ import (
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
-	"go-admin/app/admin/models"
-	"go-admin/app/admin/router"
-	"go-admin/app/jobs"
-	"go-admin/common/database"
-	"go-admin/common/global"
-	common "go-admin/common/middleware"
-	"go-admin/common/middleware/handler"
-	"go-admin/common/storage"
-	"go-admin/web"
-	ext "go-admin/config"
+	"opt-switch/app/admin/models"
+	"opt-switch/app/admin/router"
+	"opt-switch/app/jobs"
+	"opt-switch/common/database"
+	"opt-switch/common/global"
+	common "opt-switch/common/middleware"
+	"opt-switch/common/middleware/handler"
+	"opt-switch/common/storage"
+	"opt-switch/web"
+	ext "opt-switch/config"
 )
 
 var (

@@ -1,6 +1,6 @@
 FROM alpine
 
-COPY ./go-admin /
+COPY ./opt-switch /
 EXPOSE 8000
 
-CMD ["/go-admin","server","-c", "/config/settings.yml"]
+CMD ["/opt-switch","server","-c", "/config/settings.yml"]

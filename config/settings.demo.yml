@@ -10,12 +10,12 @@ settings:
     writertimeout: 20000
   database:
     driver: sqlite3
-    source: ./go-admin-db.db
+    source: ./opt-switch-db.db
   gen:
     dbname: testhhh
-    frontpath: ../go-admin-ui/src
+    frontpath: ../opt-switch-ui/src
   jwt:
-    secret: go-admin
+    secret: opt-switch
     timeout: 3600
   logger:
     # 日志存放路径

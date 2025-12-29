@@ -23,7 +23,7 @@ settings:
     enableddb: false
   jwt:
     # token 密钥，生产环境时及的修改
-    secret: go-admin
+    secret: opt-switch
     # token 过期时间 单位：秒
     timeout: 3600
   database:
@@ -36,12 +36,12 @@ settings:
     #   parseTime=True         - 解析时间为 time.Time
     #   loc=Local             - 使用本地时区
     #   timeout=1000ms        - 连接超时
-    source: root:123456@tcp(127.0.0.1:3306)/go-admin?charset=utf8mb4&parseTime=True&loc=Local&timeout=1000ms
+    source: root:123456@tcp(127.0.0.1:3306)/opt-switch?charset=utf8mb4&parseTime=True&loc=Local&timeout=1000ms
   gen:
     # 代码生成读取的数据库名称
-    dbname: go-admin
+    dbname: opt-switch
     # 代码生成是使用前端代码存放位置，需要指定到src文件夹，相对路径
-    frontpath: ../go-admin-ui/src
+    frontpath: ../opt-switch-ui/src
   extend: # 扩展项使用说明
     demo:
       name: data

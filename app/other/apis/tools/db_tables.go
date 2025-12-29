@@ -7,7 +7,7 @@ import (
 	"github.com/go-admin-team/go-admin-core/sdk/pkg"
 	_ "github.com/go-admin-team/go-admin-core/sdk/pkg/response"
 
-	"go-admin/app/other/models/tools"
+	"opt-switch/app/other/models/tools"
 )
 
 // GetDBTableList 分页列表数据

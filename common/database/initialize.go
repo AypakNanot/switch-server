@@ -14,7 +14,7 @@ import (
 	"gorm.io/gorm/logger"
 	"gorm.io/gorm/schema"
 
-	"go-admin/common/global"
+	"opt-switch/common/global"
 )
 
 // Setup 配置数据库

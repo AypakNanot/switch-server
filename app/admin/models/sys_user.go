@@ -1,7 +1,7 @@
 package models
 
 import (
-	"go-admin/common/models"
+	"opt-switch/common/models"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )

@@ -9,10 +9,10 @@ import (
 	"github.com/pkg/errors"
 	"gorm.io/gorm"
 
-	"go-admin/app/admin/models"
-	"go-admin/app/admin/service/dto"
-	cDto "go-admin/common/dto"
-	cModels "go-admin/common/models"
+	"opt-switch/app/admin/models"
+	"opt-switch/app/admin/service/dto"
+	cDto "opt-switch/common/dto"
+	cModels "opt-switch/common/models"
 
 	"github.com/go-admin-team/go-admin-core/sdk/service"
 )

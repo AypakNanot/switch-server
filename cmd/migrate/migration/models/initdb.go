@@ -2,7 +2,7 @@ package models
 
 import (
 	"fmt"
-	"go-admin/common/global"
+	"opt-switch/common/global"
 	"io/ioutil"
 	"log"
 	"strings"

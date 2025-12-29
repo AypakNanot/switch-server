@@ -10,22 +10,22 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
 WORKDIR /app
 
 # 复制二进制文件
-COPY go-admin-arm64 /app/go-admin
-RUN chmod +x /app/go-admin
+COPY opt-switch-arm64 /app/opt-switch
+RUN chmod +x /app/opt-switch
 
 # 复制配置文件和数据库初始化脚本
 COPY config/settings.switch.yml /app/config/settings.yml
 COPY config/db.sql /app/config/db.sql
 
 # 复制数据库（可选）
-# COPY go-admin-db.db /app/go-admin-db.db
+# COPY opt-switch-db.db /app/opt-switch-db.db
 
 # 复制启动脚本
 COPY scripts/docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 
 # 创建日志和数据库目录
-RUN mkdir -p /tmp/go-admin/logs
+RUN mkdir -p /tmp/opt-switch/logs
 
 # 暴露端口
 EXPOSE 8000
