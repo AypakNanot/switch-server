@@ -109,11 +109,15 @@ antd体验：[https://antd.go-admin.pro](https://antd.go-admin.pro/)
 
 ### 环境要求
 
-go 1.18
+- **Go 版本**：**Go 1.20.14**
+  - 下载：https://go.dev/dl/go1.20.14.windows-386.zip 或 go1.20.14.windows-amd64.zip
+  - 这是最后支持 Windows 7 的版本
 
-node版本: v14.16.0
+- **Node.js**：**Node.js 16.20.2**
+  - 下载：https://nodejs.org/dist/v16.20.2/
+  - 实测可在 Windows 7 上正常运行
 
-npm版本: 6.14.11
+- **NPM**：**8.19.4**
 
 ### 开发目录创建
 

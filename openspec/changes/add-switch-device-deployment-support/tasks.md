@@ -63,3 +63,11 @@
 - [x] 8.2 Create systemd service file template
 - [x] 8.3 Create init.d script template (for older systems)
 - [ ] 8.4 Add Docker multi-arch build support
+
+## 9. Development Environment Version Requirements
+- [x] 9.1 Standardize on Go 1.20.14 (last version supporting Windows 7)
+- [x] 9.2 Standardize on Node.js 16.20.2 with npm 8.19.4 (tested to work on Windows 7)
+- [x] 9.3 Update design.md with unified version requirements
+- [x] 9.4 Update README files (CN/EN) with unified version requirements
+- [x] 9.5 Ensure cross-compilation works with CGO_ENABLED=0
+- [ ] 9.6 Test cross-compile from Windows 7 to Linux ARM/MIPS targets

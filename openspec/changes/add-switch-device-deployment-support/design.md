@@ -199,8 +199,25 @@ go build \
 ## Migration Plan
 
 ### 开发环境准备
-1. 确认 Go 版本 >= 1.20（支持更多架构）
-2. 安装必要工具：`sshpass`（用于脚本自动登录）
+
+#### 统一版本要求
+项目统一使用支持 Windows 7 的最后一个版本，确保最大兼容性：
+
+- **Go 1.20.14**
+  - 下载：https://go.dev/dl/go1.20.14.windows-386.zip 或 go1.20.14.windows-amd64.zip
+  - 设置 GOPATH 和 GOROOT 环境变量
+
+- **Node.js 16.20.2**
+  - 下载：https://nodejs.org/dist/v16.20.2/
+  - NPM 版本：8.19.4
+  - 实测可在 Windows 7 上正常运行
+
+#### 交叉编译要求
+- 使用 `CGO_ENABLED=0` 确保纯静态编译
+- 支持交叉编译到 Linux ARM/MIPS 等架构
+
+#### 其他工具
+- Linux/macOS 用户：安装 `sshpass`（用于脚本自动登录）
 
 ### 编译流程
 1. 选择目标架构（参考设备文档或使用 `uname -m` 查看）

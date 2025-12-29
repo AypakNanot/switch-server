@@ -107,11 +107,15 @@ At the same time, a series of tutorials including videos and documents are provi
 
 ### Environmental requirements
 
-go 1.18
+- **Go version**: **Go 1.20.14**
+  - Download: https://go.dev/dl/go1.20.14.windows-386.zip or go1.20.14.windows-amd64.zip
+  - This is the last version supporting Windows 7
 
-nodejs: v14.16.0
+- **Node.js**: **Node.js 16.20.2**
+  - Download: https://nodejs.org/dist/v16.20.2/
+  - Tested to work on Windows 7
 
-npm: 6.14.11
+- **NPM**: **8.19.4**
 
 ### Development directory creation
 
