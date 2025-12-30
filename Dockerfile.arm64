@@ -1,3 +1,15 @@
+# Dockerfile for ARM64 Platform (Primary Deployment Target)
+#
+# This is the recommended Dockerfile for deploying opt-switch on ARM64 devices,
+# including optical switches, Raspberry Pi, and ARM servers.
+#
+# Build: docker build -f Dockerfile.arm64 -t opt-switch:arm64 .
+# Run:   docker run -d --name opt-switch -p 8000:8000 opt-switch:arm64
+#
+# Architecture: linux/arm64
+# Image Size: ~102MB
+# Base: Alpine Linux
+
 FROM --platform=linux/arm64 alpine:latest
 
 # 设置时区

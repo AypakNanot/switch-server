@@ -1,10 +1,15 @@
 # Design: Switch Device Deployment Support
 
 ## Context
+
+### 项目定位
+**opt-switch 是一个主要面向 ARM64 平台的光交换机管理系统**，专为网络交换机设备设计。
+
 网络交换机和路由器通常运行嵌入式 Linux 系统（如 OpenWrt、DD-WRT、自定义固件），具有以下特点：
 
 1. **CPU 架构多样**：
-   - ARM: ARMv5-ARMv7 (32位)，ARM64/aarch64 (64位)
+   - **ARM64/aarch64 (64位)** - 主要目标平台，现代光交换机主流架构
+   - ARM: ARMv5-ARMv7 (32位)，较旧的设备
    - MIPS: 大端序、小端序（MIPSLE），32/64位
    - PowerPC: 主要用于企业级设备
    - x86_64: 部分高端交换机
@@ -22,7 +27,8 @@
 ## Goals / Non-Goals
 
 **Goals**:
-- 支持最常见的交换机架构（ARMv7、ARM64、MIPSLE）
+- 🎯 **主要支持 ARM64 平台**（现代光交换机的标准架构）
+- 支持其他常见架构（ARMv7、MIPSLE）作为次要目标
 - 提供低内存优化配置
 - 静态编译二进制，无外部依赖
 - 自动化部署脚本

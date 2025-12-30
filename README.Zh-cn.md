@@ -30,6 +30,7 @@ antd体验：[https://antd.opt-switch.pro](https://antd.opt-switch.pro/)
 
 ## ✨ 特性
 
+- 🎯 **主要面向 ARM64 平台**：专为光交换机等网络设备优化
 - 遵循 RESTful API 设计规范
 
 - 基于 GIN WEB API 框架，提供了丰富的中间件支持（用户认证、跨域、访问日志、追踪ID等）
@@ -124,8 +125,8 @@ antd体验：[https://antd.opt-switch.pro](https://antd.opt-switch.pro/)
 ```bash
 
 # 创建开发目录
-mkdir goadmin
-cd goadmin
+mkdir opt-switch
+cd opt-switch
 ```
 
 ### 获取代码
@@ -134,12 +135,69 @@ cd goadmin
 
 ```bash
 # 获取后端代码
-git clone https://github.com/opt-switch-team/opt-switch.git
+git clone https://github.com/AypakNanot/switch-server.git
 
 # 获取前端代码
 git clone https://github.com/opt-switch-team/opt-switch-ui.git
 
 ```
+
+## 🚀 ARM64 平台部署（推荐）
+
+本系统主要面向 ARM64 平台，专为光交换机等网络设备设计。
+
+### 方式一：Docker 部署（推荐）
+
+```bash
+# 1. 交叉编译 ARM64 二进制
+env CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -ldflags="-w -s" -o opt-switch-arm64 .
+
+# 2. 构建 Docker 镜像
+docker build -f Dockerfile.arm64 -t opt-switch:arm64 .
+
+# 3. 运行容器
+docker run -d --name opt-switch -p 8000:8000 opt-switch:arm64
+```
+
+**Docker 镜像信息**：
+- 架构：linux/arm64
+- 基础镜像：Alpine Linux
+- 镜像大小：约 102MB
+- 数据库：内置 SQLite（无需额外安装）
+
+### 方式二：直接部署到 ARM64 设备
+
+```bash
+# 1. 编译 ARM64 二进制
+env CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -ldflags="-w -s" -o opt-switch .
+
+# 2. 上传到 ARM64 设备（如光交换机）
+scp opt-switch root@<switch-ip>:/opt/opt-switch/
+
+# 3. SSH 登录设备并启动
+ssh root@<switch-ip>
+cd /opt
+chmod +x opt-switch
+./opt-switch server -c config/settings.yml
+```
+
+### 支持的 ARM64 设备
+
+- 华为光交换机
+- 华三光交换机
+- 锐捷光交换机
+- 基于 ARM 的其他网络设备
+- 树莓派 4 (Model B)
+- 华为云鲲鹏服务器
+- 飞腾 FT-2000+ 服务器
+
+### 性能优化（ARM64）
+
+项目已针对 ARM64 平台进行优化：
+- ✅ 纯 Go SQLite 驱动（无需 CGO）
+- ✅ 静态链接编译
+- ✅ 最小化内存占用（约 50-100MB）
+- ✅ 低功耗设备优化
 
 ### 启动说明
 

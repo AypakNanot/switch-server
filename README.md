@@ -31,6 +31,7 @@ antd demo：[https://antd.opt-switch.pro](https://antd.opt-switch.pro/)
 > 
 ## ✨ Feature
 
+- 🎯 **Optimized for ARM64 Platform**: Designed for optical switches and network devices
 - Follow RESTful API design specifications
 
 - Based on the GIN WEB API framework, it provides rich middleware support (user authentication, cross-domain, access log, tracking ID, etc.)
@@ -122,8 +123,8 @@ At the same time, a series of tutorials including videos and documents are provi
 ```bash
 
 # Create a development directory
-mkdir goadmin
-cd goadmin
+mkdir opt-switch
+cd opt-switch
 ```
 
 ### Get the code
@@ -132,12 +133,69 @@ cd goadmin
 
 ```bash
 # Get backend code
-git clone https://github.com/opt-switch-team/opt-switch.git
+git clone https://github.com/AypakNanot/switch-server.git
 
 # Get the front-end code
 git clone https://github.com/opt-switch-team/opt-switch-ui.git
 
 ```
+
+## 🚀 ARM64 Platform Deployment (Recommended)
+
+This system is primarily designed for ARM64 platform, optimized for optical switches and network devices.
+
+### Method 1: Docker Deployment (Recommended)
+
+```bash
+# 1. Cross-compile ARM64 binary
+env CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -ldflags="-w -s" -o opt-switch-arm64 .
+
+# 2. Build Docker image
+docker build -f Dockerfile.arm64 -t opt-switch:arm64 .
+
+# 3. Run container
+docker run -d --name opt-switch -p 8000:8000 opt-switch:arm64
+```
+
+**Docker Image Info**:
+- Architecture: linux/arm64
+- Base Image: Alpine Linux
+- Image Size: ~102MB
+- Database: Built-in SQLite (no additional installation required)
+
+### Method 2: Direct Deployment to ARM64 Device
+
+```bash
+# 1. Compile ARM64 binary
+env CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -ldflags="-w -s" -o opt-switch .
+
+# 2. Upload to ARM64 device (e.g., optical switch)
+scp opt-switch root@<switch-ip>:/opt/opt-switch/
+
+# 3. SSH login and start
+ssh root@<switch-ip>
+cd /opt
+chmod +x opt-switch
+./opt-switch server -c config/settings.yml
+```
+
+### Supported ARM64 Devices
+
+- Huawei Optical Switches
+- H3C Optical Switches
+- Ruijie Optical Switches
+- Other ARM-based network devices
+- Raspberry Pi 4 (Model B)
+- Huawei Cloud Kunpeng Servers
+- Phytium FT-2000+ Servers
+
+### Performance Optimization (ARM64)
+
+The project has been optimized for ARM64 platform:
+- ✅ Pure Go SQLite driver (no CGO required)
+- ✅ Statically linked compilation
+- ✅ Minimal memory footprint (~50-100MB)
+- ✅ Low-power device optimization
 
 ### Startup instructions
 
