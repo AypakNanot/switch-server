@@ -35,6 +35,12 @@ web/dist/
 go-admin-arm*
 go-admin-mips*
 go-admin-ppc*
+opt-switch-arm*
+opt-switch-mips*
+opt-switch-ppc*
+
+# Deploy directory (contains binaries and deployment files)
+deploy/
 
 # SQLite database files
 *.db
