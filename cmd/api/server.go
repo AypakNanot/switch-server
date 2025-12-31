@@ -67,6 +67,10 @@ func setup() {
 		database.Setup,
 		storage.Setup,
 	)
+
+	//2. 运行时内存优化（在配置读取后立即执行）
+	initRuntime()
+
 	//注册监听函数
 	queue := sdk.Runtime.GetMemoryQueue("")
 	queue.Register(global.LoginLog, models.SaveLoginLog)
@@ -181,14 +185,25 @@ func initRouter() {
 		r.Use(handler.TlsHandler())
 	}
 	//r.Use(middleware.Metrics())
-	r.Use(common.Sentinel()).
-		Use(common.RequestId(pkg.TrafficKey)).
-		Use(api.SetRequestLogger)
+
+	// 条件启用中间件（用于内存优化）
+	// Sentinel 限流中间件
+	if getBoolConfig("application.enableMiddleware.sentinel", true) {
+		r.Use(common.Sentinel())
+	}
+	// RequestID 中间件
+	if getBoolConfig("application.enableMiddleware.requestID", true) {
+		r.Use(common.RequestId(pkg.TrafficKey))
+	}
+	// RequestLogger 中间件（始终启用）
+	r.Use(api.SetRequestLogger)
 
 	common.InitMiddleware(r)
 
-	// 设置前端静态文件服务 - 直接使用 embed.FS 读取文件
-	// 静态资源路由 (css, js, fonts, img 等)
+	// 条件启用前端静态文件（用于内存优化）
+	if getBoolConfig("application.enableFrontend", true) {
+		// 设置前端静态文件服务 - 直接使用 embed.FS 读取文件
+		// 静态资源路由 (css, js, fonts, img 等)
 	serveStaticFile := func(c *gin.Context, filePath string) {
 		data, err := web.WebFS.ReadFile(filePath)
 		if err != nil {
@@ -266,4 +281,20 @@ func initRouter() {
 		// 返回 index.html
 		serveStaticFile(c, "dist/index.html")
 	})
+	} // end of if enableFrontend
+
+	// 如果未启用前端，根路径返回 API 信息
+	if !getBoolConfig("application.enableFrontend", true) {
+		r.GET("/", func(c *gin.Context) {
+			c.JSON(http.StatusOK, gin.H{
+				"code":    200,
+				"message": "opt-switch API Server (Minimal Mode)",
+				"data": gin.H{
+					"version": global.Version,
+					"mode":    "api-only",
+					"docs":    "/swagger/admin/index.html",
+				},
+			})
+		})
+	}
 }
