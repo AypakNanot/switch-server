@@ -25,7 +25,13 @@
       "Bash(docker logs:*)",
       "Bash(docker build:*)",
       "Bash(docker run:*)",
-      "Bash(docker exec:*)"
+      "Bash(docker exec:*)",
+      "Skill(openspec:proposal)",
+      "Bash(docker ps:*)",
+      "Bash(docker stats:*)",
+      "Bash(cat:*)",
+      "Bash(netstat:*)",
+      "Bash(taskkill:*)"
     ],
     "deny": [],
     "ask": []
