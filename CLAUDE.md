@@ -16,3 +16,19 @@ Use `@/openspec/AGENTS.md` to learn:
 Keep this managed block so 'openspec update' can refresh the instructions.
 
 <!-- OPENSPEC:END -->
+
+---
+
+# Git Workflow Instructions
+
+**DO NOT automatically commit or push code.**
+
+When working with this repository:
+
+1. **NEVER** automatically execute `git commit`
+2. **NEVER** automatically execute `git push`
+3. **ASK** the user before performing any commit/push operations
+4. **SHOW** the proposed commit message and await confirmation
+5. **OR** display the git commands for the user to execute manually
+
+If the user asks to "commit" or "push" changes, first show them what will be committed and ask for confirmation.
