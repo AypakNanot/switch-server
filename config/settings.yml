@@ -81,3 +81,31 @@ settings:
 #        reclaimInterval: 1
   locker:
     redis:
+  # Device configuration for local switch management
+  device:
+    # Device connection settings
+    connection:
+      host: 127.0.0.1        # Local loopback for SSH connection
+      port: 22
+      protocol: ssh          # ssh or telnet
+      username: admin
+      password: admin        # Change this in production!
+      timeout: 30            # Connection timeout in seconds
+    # Connection pool settings
+    pool:
+      max_connections: 3     # Maximum concurrent connections
+      min_connections: 1     # Minimum connections to maintain
+      idle_timeout: 300      # Idle connection timeout in seconds
+      command_timeout: 30    # Command execution timeout in seconds
+      queue_timeout: 60      # Queue wait timeout in seconds
+      max_queue_size: 100    # Maximum queue size
+    # Execution logging settings
+    log:
+      enabled: true
+      file: logs/command.log        # Log file path
+      max_size: 100                 # Max file size in MB
+      max_backups: 3                # Number of backup files
+      max_age: 7                    # Retention days
+      compress: true                # Compress old log files
+      include_output: true          # Include command output in logs
+      max_output_size: 10240        # Max output size to log in bytes (10KB)

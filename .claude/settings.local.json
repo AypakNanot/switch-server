@@ -31,7 +31,13 @@
       "Bash(docker stats:*)",
       "Bash(cat:*)",
       "Bash(netstat:*)",
-      "Bash(taskkill:*)"
+      "Bash(taskkill:*)",
+      "Bash(ls:*)",
+      "Bash(cmd /c \"go-admin.exe migrate\")",
+      "Bash(cmd /c \"start /B go-admin.exe server\")",
+      "Bash(powershell.exe:*)",
+      "Bash(cmd:*)",
+      "Bash(go run:*)"
     ],
     "deny": [],
     "ask": []
